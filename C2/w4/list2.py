@@ -1,4 +1,3 @@
-#file name = mbox-short.txt
 fname = input("Enter file name: ")
 
 fh = open(fname)
