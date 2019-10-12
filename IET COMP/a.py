@@ -1,2 +1,2 @@
-c = '\010'
-print(c)
+str =input('taking input: ')
+print(str) 
