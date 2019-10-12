@@ -7,7 +7,7 @@ from lxml import html
 
 driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
 
-driver.get("http://care.srmist.edu.in/ktrds/")
+driver.get("website")
 
 
 
@@ -16,8 +16,8 @@ for f in driver.forms():
 
 
 
-usr = "RA1811003010182"
-pswd ="rajat4563"
+usr = "username"
+pswd ="pass"
 
 
 content = driver.page_source
