@@ -1,6 +1,6 @@
 import re
 
-hf = open('mbox.txt')
+hf = open('')#filename
 a = hf.read()
 
 y  = re.findall('[0-9]+' ,a)
