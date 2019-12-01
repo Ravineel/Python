@@ -25,10 +25,5 @@ for a in range(c):
     soup = BeautifulSoup(html,'html.parser')
     tags = soup('a')
     
-    
-    
-
-
-    
 print (name)
 
