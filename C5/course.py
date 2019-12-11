@@ -41,8 +41,8 @@ json_data = json.loads(str_data)
 
 for entry in json_data:
 
-    name = entry[0];
-    title = entry[1];
+    name = entry[0]
+    title = entry[1]
     role = entry[2]
 
     print((name, title, role))
