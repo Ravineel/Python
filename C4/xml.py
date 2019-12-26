@@ -13,6 +13,7 @@ html = urllib.request.urlopen(url, context=ctx).read()
 #print(html.decode())
 print('Retrieved ',len(html),' characters')
 tree = et.fromstring(html)
+print(tree)
 count = tree.findall('.//count')
 print('Counts: ',len(count))
 sum =0

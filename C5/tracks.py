@@ -53,6 +53,7 @@ def lookup(d, key):
     return None
 
 stuff = ET.parse(fname)
+print(stuff)
 all = stuff.findall('dict/dict/dict')
 print('Dict count:', len(all))
 for entry in all:
