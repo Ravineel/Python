@@ -225,28 +225,7 @@ while(True):
             
             conn.commit()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-
-
-
-
-
-
-
-        
+      
 conn.commit()
 conn.close()
 sys.exit()
