@@ -4,11 +4,13 @@ class Connections():
     @staticmethod
     def connection(dbname):
         conn = sqlite3.connect(dbname+'.sqlite')
-        return conn
+        cur = conn.cursor()
+        return conn,cur
     
     @staticmethod
     def login():
         conn = sqlite3.connect('login.sqlite')
-        return conn
+        cur = conn.cursor()
+        return conn,cur
 
 
