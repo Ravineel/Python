@@ -55,6 +55,7 @@ def check_stock():
             else:
                 tkinter.messagebox.showinfo("error", val)
             reset()
+            Check.conn.close()
 
         
         else:

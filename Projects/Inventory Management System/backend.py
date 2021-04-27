@@ -99,49 +99,6 @@ class Backened:
             return res,msg
     
     
-    
-    def use_Stock(self, part_name, part_id='', qty=0, type = '', vehicle_no='', location='', reason=''):
-        
-        res, msg = self.check_Part(part_name, part_id)
-       
-        if res ==True:
-            try:
-                self.cur.execute(
-                    'UPDATE Stock SET Stock = Stock - ? where Part_Name = ? or Part_Id = ? ', 
-                    (qty,part_name,part_id,) 
-                )
-                qty = -qty
-                if type=='camp':
-                    self.cur.execute(
-                    ''' INSERT INTO ? (Part_Name, Part_Id, QTY, Reason, Location,DATETIME)
-                    VALUES(?,?,?,?,datetime('now', 'localtime'))''',(type, part_name, part_id, qty,reason,location, )
-                    )
-
-                elif type=='vehicle':
-                    self.cur.execute(
-                    ''' INSERT INTO ? (Part_Name, Part_Id, QTY, Reason, Vehicel_NO,DATETIME)
-                    VALUES(?,?,?,?,?,datetime('now', 'localtime'))''',(type, part_name, part_id, qty,reason, vehicle_no,)
-                    )
-
-                else:
-                    self.cur.execute(
-                        ''' INSERT INTO ? (Part_Name, Part_Id, QTY, Reason, DATETIME)
-                        VALUES(?,?,?,?,datetime('now', 'localtime'))''',(type, part_name, part_id, qty,reason,)
-                    )
-
-
-                self.cur.execute(
-                    '''INSERT INTO History (Part_Name,Part_ID,ADD_Remove,Time) 
-                    VALUES(?,?,?,datetime('now','localtime'))''', (part_name,part_id,qty,) 
-                )
-                self.cur.commit()
-                res=True
-                msg='Succesfull'
-            except:
-                res=False
-                msg = 'Error Occured, Try again'
-            return res, msg
-    
     def check_Stock(self, part_name, part_id=''):
         res, msg = self.check_Part(part_name,part_id)
         if res:
@@ -151,7 +108,7 @@ class Backened:
             )
 
             row  = self.cur.fetchone()
-            self.conn.close()
+            
 
             if row is None:
                 return False,'Please Try Again'
@@ -161,6 +118,57 @@ class Backened:
         else: 
             self.conn.close()         
             return False, 'No Part'
+    
+    def use_Stock(self, part_name, part_id='', qty=0, type_val = '', vehicle_no='', location='', reason=''):
+        qty = int(qty)
+        res, val = self.check_Stock(part_name, part_id)
+      
+        if res:
+            try:
+                if qty <= val[2]:
+                    new_val= val[2]-qty
+     
+                    self.cur.execute(
+                            '''UPDATE Stock SET Stock =  ? where Part_Name = ? or Part_Id = ? ''', 
+                            (new_val,part_name,part_id,) 
+                    )
+                    qty = -qty
+                    if type_val=='camp':
+                        self.cur.execute(
+                            ''' INSERT INTO camp (Part_Name, Part_Id, QTY, Reason, Location,DATETIME)
+                            VALUES(?,?,?,?,?,datetime('now', 'localtime'))''',(part_name, part_id, qty,reason,location,)
+                        )
+
+                    elif type_val=='vehicle':
+                       
+                        self.cur.execute(
+                            ''' INSERT INTO vehicle (Part_Name, Part_Id, QTY, Reason, Vehicel_NO,DATETIME)
+                            VALUES(?,?,?,?,?,datetime('now', 'localtime'))''',( part_name, part_id, qty,reason, vehicle_no,)
+                        )
+                       
+                    else:
+                        self.cur.execute(
+                                ''' INSERT INTO general (Part_Name, Part_Id, QTY, Reason, DATETIME)
+                                VALUES(?,?,?,?,datetime('now', 'localtime'))''',( part_name, part_id, qty,reason,)
+                        )
+
+                    self.cur.execute(
+                            '''INSERT INTO History (Part_Name,Part_ID,ADD_Remove,Time) 
+                            VALUES(?,?,?,datetime('now','localtime'))''', (part_name,part_id,qty,) 
+                    )
+                    self.conn.commit()
+                    res=True
+                    msg='Succesfull'
+                    return res,msg
+
+                else:
+                    return False, 'Stock Not available'
+
+            except Error:
+                res=False
+                msg = 'Error Occured, Try again'
+                print(Error)
+            return res, msg
         
 
         
