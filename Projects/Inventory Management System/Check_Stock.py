@@ -35,7 +35,7 @@ def check_stock():
         res,val = Check.check_Stock(part_name, part_id)
         if part_name is not None:    
             if res:
-                tkinter.messagebox.showinfo("", "Data is present.")
+                
                 tkk = Tk()
                 i=0
                 head = ('Part_Name', 'Part_Id', 'QTY')

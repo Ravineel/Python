@@ -36,8 +36,9 @@ def add_stock_info():
             part_name = PartName.get()
             part_id = PartID.get()
             desc = Description.get()
-
-            res,msg  = Info.add_Stock_Info(part_name,part_id,desc)
+            if len(part_id)<1:
+                part_id=None
+            res,msg  = Info.add_Stock_Info(part_name,part_id,desc,0)
             if res:
                 tkinter.messagebox.showinfo("", msg)
             else:

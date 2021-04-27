@@ -1,7 +1,7 @@
 import tkinter
 from tkinter import *
 import tkinter.messagebox
-
+from backend import Backened
 
 def add_stock():
     tk = Tk()
@@ -30,7 +30,18 @@ def add_stock():
 
     def add():
         if PartName.get() and Quantity.get():
-            tkinter.messagebox.showinfo("", "Data has been added.")
+            Stock = Backened()
+
+            part_name = PartName.get()
+            part_id = PartID.get()
+            qty = Quantity.get()
+            if len(part_id)<1:
+                part_id=None
+            res, msg = Stock.add_Stock(part_name,part_id,qty)
+            if res:
+                tkinter.messagebox.showinfo("Success", msg)
+            else:
+                tkinter.messagebox.showinfo("Error", msg)
             reset()
         else:
             tkinter.messagebox.showinfo("Error", "Mandatory fields have not been filled.")
@@ -42,4 +53,4 @@ def add_stock():
     tk.mainloop()
 
 
-#add_stock()
+add_stock()

@@ -42,7 +42,6 @@ def login():
 
     def validateLogin():
         if tkWindow.counter < 2:
-            print(username,password)
             res, msg = log(username.get(),password.get())
             if res:
                 tkinter.messagebox.showinfo("SUCCESS",msg)

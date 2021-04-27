@@ -63,7 +63,7 @@ class Backened:
                 return False, msg
             else:
                 stock=0
-                res,msg = self.add_New_Stock(part_name,part_id,part_description,stock,qty)
+                res,msg = self.add_New_Stock(part_name,part_id,part_description,qty)
                 if res == True:
                     return res,"Data has been added."
 

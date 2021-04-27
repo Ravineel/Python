@@ -1,7 +1,7 @@
 import tkinter
 from tkinter import *
 import tkinter.messagebox
-
+import sys
 
 def menu():
     tk = Tk()
@@ -11,6 +11,7 @@ def menu():
     def Exit():
         tkinter.messagebox.showinfo("Exiting", "Closing the Application..")
         tk.destroy()
+        sys.exit()
         exit()
 
     def addstock():
