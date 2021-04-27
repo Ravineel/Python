@@ -1,4 +1,5 @@
-./build
+./build/main
+./build/
 ./dist
 *.sqlite
 *.sqbpro
