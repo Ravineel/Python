@@ -7,19 +7,22 @@ class Login:
         self.conn,self.cur = Connections.login()
 
     def connect(self,usrname,psswd):
+        try:
+            print(usrname, psswd)
+            self.cur.execute('SELECT username,password FROM login WHERE username = ?  and  password = ?', (usrname,psswd,))
+            row = self.cur.fetchone()
 
-        self.cur.execute('SELECT username,password FROM login WHERE username = ?  and  password = ?', (usrname,psswd,))
-        row = self.cur.fetchone()
-
-        if row is None:
-            print("Username  or  Password is wrong")
-
-    
-        else:
-            print("Login Successfull")
-            self.check=True
-            self.conn.close()
-        return self.check
+            if row is None:
+                return False,"Wrong Credentials"    
+            else:
+                msg = "Login Successfull"
+                self.check=True
+                self.conn.close()
+                print(msg)
+        except:
+            self.check=False
+            msg = "Failed"
+        return self.check, msg
         
 
 
