@@ -45,8 +45,6 @@ def login():
             res, msg = log(username.get(),password.get())
             if res:
                 tkinter.messagebox.showinfo("SUCCESS",msg)
-                print(msg)
-                
                 #menu()
                 tkWindow.destroy()
                 from Menu import menu
