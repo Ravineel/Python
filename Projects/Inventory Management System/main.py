@@ -2,9 +2,7 @@ import sqlite3
 import getpass
 import sys
 import datetime
-from manage import Manage
 from login import Login
-
 import tkinter
 from tkinter import *
 import tkinter.messagebox

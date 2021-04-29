@@ -8,7 +8,7 @@ class Login:
 
     def connect(self,usrname,psswd):
         try:
-            print(usrname, psswd)
+           
             self.cur.execute('SELECT username,password FROM login WHERE username = ?  and  password = ?', (usrname,psswd,))
             row = self.cur.fetchone()
 
