@@ -12,7 +12,7 @@ for i,j in edges:
 print(Amat)
 #%%
 #Neighbours of v
-def neighnours(A,i):
+def neighbours(A,i):
   nbrs =[]
   (rows,cols)=A.shape
   for j in range(cols):
