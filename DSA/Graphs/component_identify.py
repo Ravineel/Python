@@ -1,7 +1,7 @@
 #%%
 #Edge and Adacency List for undirected graph
 
-edges = [(0,1),(0,4),(4,8),(4,9),\
+edges = [(0,1),(0,4),(4,8),(4,9),(8,9),\
   (2,3),(2,6),(3,7),(2,7),(6,7),(7,10),(7,11),(6,10)]
 
 Alist ={}
@@ -74,8 +74,9 @@ def Components(A):
     startv = min([i for i in A.keys() if component[i]==-1])
     visited = BFSList(A,startv)
     for i in visited.keys():
-      seen=seen+1
-      component[i]=compid
+      if visited[i]:
+        seen=seen+1
+        component[i]=compid
     compid=compid+1
   return component
 
