@@ -90,10 +90,10 @@ edges = [(0,1),(0,4),(1,2),(2,0),(3,4),(3,6),\
 #Adjacency Matrix
 #eg 
 import numpy as np
-from pkg_resources import EggMetadata
 Amat = np.zeros(shape=(10,10))
 for i,j in edges:
   Amat[i,j]=1
+  Amat[j,i]=1
 v = 7
 BFS(Amat,v)
 
@@ -106,6 +106,7 @@ for i in range(10):
 
 for i,j in edges:
   Alist[i].append(j)
+  Alist[j].append(i)
 v = 7
 # %%
 #Record Path i to k
