@@ -15,7 +15,7 @@ class Queue:
     
   def isEmpty(self):
     return self.queue == []
-   
+
   def addq(self,v):
     self.queue.append(v)
 
@@ -82,14 +82,15 @@ def BFS(A,v,l=1):
 
   return visited
 # %%
-
 #Edge
+
 edges = [(0,1),(0,4),(1,2),(2,0),(3,4),(3,6),\
   (4,0),(4,3),(4,7),(5,3),(5,7),(6,5),(7,4),(7,8),(8,5),(8,9),(9,8)]
 #%%
 #Adjacency Matrix
 #eg 
 import numpy as np
+from pkg_resources import EggMetadata
 Amat = np.zeros(shape=(10,10))
 for i,j in edges:
   Amat[i,j]=1
@@ -106,5 +107,57 @@ for i in range(10):
 for i,j in edges:
   Alist[i].append(j)
 v = 7
-BFS(Alist,v,0)
+# %%
+#Record Path i to k
+
+def BFSListPath(A,v):
+  (visited,parent)=({},{})
+  for i in A.keys():
+    visited[i]=False
+    parent[i]=-1
+
+  q = Queue()
+
+  visited[v]=True
+  q.addq(v)
+
+  while not q.isEmpty():
+    j = q.delq()
+    for k in A[j]:
+      if not visited[k]:
+        visited[k]=True
+        parent[k]=j
+        q.addq(k) 
+  
+  return visited,parent
+
+#%%
+#eg
+BFSListPath(Alist,v)
+# %%
+#Record Distance
+def BFSListDistance(A,v):
+  (level,parent) ={},{}
+  for i in A.keys():
+    level[i]=-1
+    parent[i]=-1
+  
+  q=Queue()
+
+  level[v]=0
+  q.addq(v)
+  while not q.isEmpty():
+    j = q.delq()
+    for k in A[j]:
+      if level[k]==-1:
+        level[k]=level[j]+1
+        parent[k]=j
+        q.addq(k)
+
+  return level,parent
+
+
+#%%
+#eg
+BFSListDistance(Alist,v)
 # %%
