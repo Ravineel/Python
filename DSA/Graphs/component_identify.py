@@ -4,8 +4,18 @@
 edges = [(0,1),(0,4),(4,8),(4,9),(8,9),\
   (2,3),(2,6),(3,7),(2,7),(6,7),(7,10),(7,11),(6,10)]
 
+
+vrt=[ 1 ,2 ,3 ,4 ,5 ,6 ,7 ,8]
+# 6
+# 1 3
+# 3 4
+# 3 7
+# 5 6
+# 5 8
+# 6 8
+
 Alist ={}
-for i in range(12):
+for i in vrt:
   Alist[i]=[]
 
 for i,j in edges:
@@ -78,7 +88,7 @@ def Components(A):
         seen=seen+1
         component[i]=compid
     compid=compid+1
-  return component
+  return compid
 
 #%%
 #Eg

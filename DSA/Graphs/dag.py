@@ -96,3 +96,33 @@ def TopologicalSort(A):
 TopologicalSort(Alist)
 
 # %%
+#Longest Path in DAG 
+
+def longestpath(A):
+  (indegree,lpath)=({},{})
+  for u in A.keys():
+    indegree[u],lpath[u]=0,0
+  
+  for u in A.keys():
+    for v in A[u]:
+      indegree[v]+=1
+  
+  zerodegreeq = Queue()
+  for u in A.keys(): 
+    if indegree[u]==0:
+      zerodegreeq.addq(u)
+  
+  while not zerodegreeq.isempty():
+    j = zerodegreeq.delq()
+    indegree[j]-=1
+    for k in A[j]:
+      indegree[k]-=1
+      lpath[k] = max(lpath[k],lpath[j]+1)  
+      if indegree[k]==0:
+        zerodegreeq.addq(k)
+  
+  return lpath
+
+#%%
+longestpath(Alist)    
+# %%
